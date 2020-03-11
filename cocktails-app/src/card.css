@@ -1,0 +1,19 @@
+.news-card {
+  position: relative;
+  background-color: lightpink;
+  border-radius: 20px;
+  padding: 15px 15px 10px;
+  margin: 10px
+}
+
+.news-card-title {
+  font-size: 1.5rem;
+}
+
+.news-card-link {
+  display: block;
+}
+
+.news-card-created {
+  text-align: right;
+}
