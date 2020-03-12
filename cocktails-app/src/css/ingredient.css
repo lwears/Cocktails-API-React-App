@@ -1,0 +1,19 @@
+.ingredient { 
+  background-position: center center; 
+  background-size: cover;
+  filter: brightness(0.6);
+  cursor: pointer; 
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: ease-in;
+  color: white;
+}
+
+.ingredient:hover {
+  transition: ease-in;
+  filter: brightness(0.9);
+}
+
+
+

@@ -1,0 +1,27 @@
+.home {
+  height: 90%; 
+  width: 100%;
+}
+.home-ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  height: 87vh;
+  width: 100%;
+}
+
+	
+.Home							{ height: 90%; width: 100%;
+  .Home-ingredients			{ height: 100%; width: 100%;
+    .Ingredient				{ background-position: center center; background-size: cover; cursor: pointer; display: table; float: left; height: 100%; position: relative; width: 20%;
+      @media(max-width: $screen-md) { height: 500px; width: 100%; }
+      &:before			{ content: ''; background-color: rgba($black, .6); position: absolute; top: 0; left: 0; height: 100%; transition: all .3s; width: 100%; }
+      &:hover 			{
+        &:before 		{ background-color: rgba($black, .3); }
+      }
+      .inner				{ display: table-cell; position: relative; vertical-align: middle; z-index: 100;
+      h1,p				{ text-shadow: 0px 10px 10px rgba($black, 1); color: $white; margin: 0; }
+      }
+      &.Tequila, .Gin		{ background-position: center right; }
+    }
+  }
+}

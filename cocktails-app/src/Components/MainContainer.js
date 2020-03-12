@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import axios from 'axios';
 import Board from './Board';
 import Header from './Header';
+import HomeContainer from './HomeContainer';
 import DrinkContainer from './DrinkContainer';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Ingredient from './Ingredient';
 
 
 export default class MainContainer extends Component {
@@ -48,11 +49,7 @@ export default class MainContainer extends Component {
 
 
   render() {
-    const display = this.state.drinks
-      ? <Board drinks={this.state.result} />
-      : this.state.hasSearched
-        ? <div>{this.state.spinner}</div>
-        : '';
+    const display = this.state.drinks ? <Board drinks={this.state.result} /> : <HomeContainer />
 
     return (
       <BrowserRouter>
@@ -60,6 +57,7 @@ export default class MainContainer extends Component {
           <Header search={this.getCocktail} />
           <Switch>
             <Route exact path="/" render={ () => display }/>
+            {/* <Route path="/ingredient" component={HomeContainer}/> */}
             {/* <Route path="/drink" /> */}
             <Route path="/drink/:id" component={DrinkContainer}/> }/>
           </Switch>

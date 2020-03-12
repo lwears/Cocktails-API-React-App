@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Drink from './Drink';
 import axios from 'axios';
 
 export default class DrinkContainer extends Component {
@@ -21,7 +22,7 @@ export default class DrinkContainer extends Component {
 
   render() {
    const display = this.state.specificCocktail
-      ? <p>{JSON.stringify(this.state.specificCocktail.drinks)}</p>
+      ? <Drink cocktail={this.state.specificCocktail}/>
       : ''
     return (
       display

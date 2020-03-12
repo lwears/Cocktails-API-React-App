@@ -1,4 +1,11 @@
 import React from 'react';
+import '../css/homeContainer.css';
+import Ingredient from './Ingredient';
+import Whiskey from './Images/Optimized-whiskey.jpg';
+import Vodka from './Images/Optimized-vodka.jpg';
+import Gin from './Images/Optimized-gin.jpg';
+import Rum from './Images/Optimized-rum.jpg';
+import Tequila from './Images/Optimized-tequila.jpg';
 
 const categories = [
   { name: 'Whiskey', image: Whiskey, link: '/whiskey' },
@@ -10,8 +17,8 @@ const categories = [
 
 export default function HomeContainer() {
   return (
-    <div className="Home">
-      <div className="Home-ingredients">
+    <div className="home">
+      <div className="home-ingredients">
         {categories && categories.map(
           (item, index) => (
             <Ingredient

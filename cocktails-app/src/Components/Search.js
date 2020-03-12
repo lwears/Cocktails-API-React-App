@@ -1,5 +1,5 @@
 import React from 'react';
-import './search.css';
+import '../css/search.css';
 
 export default function Search(props) {
   const searchInput = React.createRef();
@@ -13,7 +13,7 @@ export default function Search(props) {
   return (
     <form className="search" onSubmit={handleSubmit}>
       <input type="text" id="search" ref={searchInput} />
-      <input type="submit" />
+      <input type="submit" value="Search" />
     </form>
   );
 }

@@ -4,18 +4,6 @@ const router = express.Router();
 const axios = require('axios');
 
 /*
-Search cocktail by name
-https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
-
-Search ingredient by name
-https://www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka
-
-Lookup full cocktail details by id
-https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
-
-Lookup a random cocktail
-https://www.thecocktaildb.com/api/json/v1/1/random.php
-
 Search by ingredient
 https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
 https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
@@ -23,31 +11,53 @@ https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
 Filter by alcoholic
 https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic
 https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic
-
-Filter by Category
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail
 */
+
+const formatObject = (obj) => {
+  const ingredients = [];
+  const measurements = [];
+  const needs = [];
+
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] && key.includes('strIngredient')) {
+      ingredients.push(obj[key]);
+    }
+    if (obj[key] && key.includes('strMeasure') && obj[key].match(/[a-zA-Z0-9]/i)) {
+      measurements.push(obj[key]);
+    }
+  });
+
+  for (let i = 0; i < ingredients.length; i += 1) {
+    const ingredient = ingredients[i] ? ingredients[i] : '';
+    const measurement = measurements[i] ? measurements[i] : '';
+    needs.push(`${measurement} ${ingredient}`);
+  }
+
+  return {
+    id: obj.idDrink,
+    name: obj.strDrink,
+    category: obj.strCategory,
+    alcoholic: obj.strAlcoholic,
+    glass: obj.strGlass,
+    instructions: obj.strInstructions,
+    img: obj.strDrinkThumb,
+    needs,
+  };
+};
+
 
 // Get Specific Cocktail, /api/cocktails/:nameOfCocktail
 router.get('/cocktails/:cocktail', async (req, res, next) => {
   const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${req.params.cocktail}`);
-  const result = initialResult.data.drinks.map((drink) => ({
-    idDrink: drink.idDrink,
-    strDrink: drink.strDrink,
-    strCategory: drink.strCategory,
-    strAlcoholic: drink.strAlcoholic,
-    strGlass: drink.strGlass,
-    strInstructions: drink.strInstructions,
-    strDrinkThumb: drink.strDrinkThumb,
-  }));
+  const result = initialResult.data.drinks.map((drink) => (formatObject(drink)));
   res.json(result);
 });
 
 // Get Specific Cocktail, /api/CocktailID
 router.get('/:cocktailID', async (req, res, next) => {
-  const result = await axios.get(`  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${req.params.cocktailID}`);
-  res.json(result.data);
+  const initialResult = await axios.get(`  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${req.params.cocktailID}`);
+  const result = formatObject(initialResult.data.drinks[0]);
+  res.json(result);
 });
 
 // Get Random cocktail
