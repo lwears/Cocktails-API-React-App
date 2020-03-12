@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 const axios = require('axios');
 
 /*
@@ -42,13 +43,13 @@ router.get('/:cocktailID', async (req, res, next) => {
 
 // Get Random cocktail
 router.get('/cocktails/random', async (req, res, next) => {
-  const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+  const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
   res.json(result.data);
 });
 
 // Get Cocktail by ingredient
 router.get('/ingredients/:ingredient', async (req, res, next) => {
-  const result = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`)
+  const result = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`);
   res.json(result.data);
 });
 

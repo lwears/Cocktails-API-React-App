@@ -24,19 +24,19 @@ export default class App extends Component {
       .then(data =>this.setState({drinks: data.data, result: data.data}))
   }
 
-    filter = (e) => {
-      const { value } = e.target;
-      const { data } = this.state;
-      if (value !== '') {
-        this.setState({
-          result: {
-            hits: data.hits.filter((hit) => hit.title.toLowerCase().includes(value.toLowerCase())),
-          },
-        });
-      } else {
-        this.setState({ result: data });
-      }
-    };
+  filter = (e) => {
+    const { value } = e.target;
+    const { data } = this.state;
+    if (value !== '') {
+      this.setState({
+        result: {
+          hits: data.hits.filter((hit) => hit.title.toLowerCase().includes(value.toLowerCase())),
+        },
+      });
+    } else {
+      this.setState({ result: data });
+    }
+  };
 
 
   render() {
