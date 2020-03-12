@@ -31,8 +31,17 @@ https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail
 
 // Get Specific Cocktail, /api/cocktails/:nameOfCocktail
 router.get('/cocktails/:cocktail', async (req, res, next) => {
-  const result = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${req.params.cocktail}`);
-  res.json(result.data);
+  const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${req.params.cocktail}`);
+  const result = initialResult.data.drinks.map((drink) => ({
+    idDrink: drink.idDrink,
+    strDrink: drink.strDrink,
+    strCategory: drink.strCategory,
+    strAlcoholic: drink.strAlcoholic,
+    strGlass: drink.strGlass,
+    strInstructions: drink.strInstructions,
+    strDrinkThumb: drink.strDrinkThumb,
+  }));
+  res.json(result);
 });
 
 // Get Specific Cocktail, /api/CocktailID

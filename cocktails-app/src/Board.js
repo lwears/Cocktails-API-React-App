@@ -3,9 +3,10 @@ import Card from './Card';
 import './board.css';
 
 export default function Board(props) {
+  const { drinks } = props;
   return (
     <div className="cocktails-board">
-      {props.drinks.drinks.map((drink, i) => <Card drink={drink} key={i} />)}
+      {drinks.map((drink, i) => <Card drink={drink} key={drink.idDrink} />)}
     </div>
   );
 }

@@ -4,6 +4,9 @@ import './App.css';
 import axios from 'axios';
 import Board from './Board';
 import Header from './Header';
+import DrinkContainer from './DrinkContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 
 export default class MainContainer extends Component {
   constructor() {
@@ -52,10 +55,16 @@ export default class MainContainer extends Component {
         : '';
 
     return (
-      <div className="app">
-        <Header search={this.fetchData} />
-        <section>{display}</section>
-      </div>
+      <BrowserRouter>
+        <div className="main-container">
+          <Header search={this.getCocktail} />
+          <Switch>
+            <Route exact path="/" render={ () => display }/>
+            {/* <Route path="/drink" /> */}
+            <Route path="/drink/:id" component={DrinkContainer}/> }/>
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
