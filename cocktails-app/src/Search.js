@@ -1,10 +1,19 @@
-import React from 'react'
+import React from 'react';
+import './search.css';
 
 export default function Search(props) {
+  const searchInput = React.createRef();
+  const { search } = props;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    search(searchInput.current.value);
+  };
+
   return (
-    <div className="search">
-      <input type="text" id="search"/>
-      <button onClick={() => props.search(document.getElementById('search').value)}>Search</button>
-    </div>
-  )
+    <form className="search" onSubmit={handleSubmit}>
+      <input type="text" id="search" ref={searchInput} />
+      <input type="submit" />
+    </form>
+  );
 }

@@ -4,11 +4,16 @@
   padding: 0;
 }
 
-.cocktail-board {
+.cocktails-board {
+  background: #e2e1e0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   flex-direction: row;
   -ms-flex-pack: distribute;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+  justify-items: center;
 }

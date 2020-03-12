@@ -4,9 +4,8 @@ import './App.css';
 import axios from 'axios';
 import Board from './Board';
 import Header from './Header';
-import MainContainer from './MainContainer';
 
-export default class App extends Component {
+export default class MainContainer extends Component {
   constructor() {
     super();
     this.state = {
