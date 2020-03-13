@@ -15,7 +15,7 @@ export default function Drink(props) {
         <h1 className="drink-name">{ name }</h1>
         <h4>{ alcoholic }</h4>
         <div className="drink-needs">
-          <h5>Ingredients:</h5>
+          <h3>Ingredients:</h3>
           <ul>
             {needs.map(
               (need) => (
@@ -25,14 +25,14 @@ export default function Drink(props) {
           </ul>
         </div>
         <div className="Drink-instructions">
-          <h5>Instructions:</h5>
+          <h3>Instructions:</h3>
           <p>{ instructions }</p>
         </div>
-        <h5>
-Type Of Glass:
+        <h4>
+          Type Of Glass:
           {' '}
           { glass }
-        </h5>
+        </h4>
       </div>
     </div>
   );

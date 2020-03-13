@@ -1,8 +1,39 @@
 .drink-container {
   border: 1px solid black;
   padding: 1%;
-  margin: 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1%;
+  max-width: 80%;
+  margin: auto;
+}
+
+.drink-image {
+}
+
+.drink-details {
+  padding: 5%;
+  margin: 5%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 1%;
+}
+
+li {
+  margin: 2%;
+}
+
+.drink-needs {
+  padding: 5%;
+  margin: 5%;
+}
+
+h3 {
+  margin: 1%;
+}
+
+h4 {
+  margin: 1%;
 }

@@ -3,16 +3,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-/*
-Search by ingredient
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
-
-Filter by alcoholic
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic
-https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic
-*/
-
 const formatObject = (obj) => {
   const ingredients = [];
   const measurements = [];
@@ -60,16 +50,16 @@ router.get('/:cocktailID', async (req, res, next) => {
   res.json(result);
 });
 
-// Get Random cocktail
-router.get('/cocktails/random', async (req, res, next) => {
-  const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-  res.json(result.data);
-});
-
 router.get('/ingredients/:ingredient', async (req, res, next) => {
   const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`);
   const result = initialResult.data.drinks.map((drink) => (formatObject(drink)));
   res.json(result);
+});
+
+// Get Random cocktail
+router.get('/cocktails/random', async (req, res, next) => {
+  const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  res.json(result.data);
 });
 
 module.exports = router;

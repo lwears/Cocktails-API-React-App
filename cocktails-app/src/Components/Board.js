@@ -1,41 +1,26 @@
-import React, { Component } from 'react';
-import Card from './Card';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Card from './Card';
 import '../css/board.css';
 
-export default class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      drinks: props.drinks
-    };
-  }
+export default function Board(props) {
+  const [drinks, setDrinks] = useState(props.drinks);
 
-  getCocktailByIngredient = (ingredient) => {
-    this.setState({ drinks: null });
-    axios.get(`/api/ingredients/${ingredient}`)
-      .then((data) => this.setState({ drinksByIngredient: data.drinks }));      
+  const getCocktailByIngredient = async (ingredient) => {
+    const { data } = await axios.get(`/api/ingredients/${ingredient}`);
+    setDrinks(data);
   };
 
-  async componentDidMount(props) {
-    if (!this.state.drinks) {
-      const ingredient = this.props.match.url.split('/')
-      const response = await axios.get(`/api/ingredients/${ingredient[1]}`)
-      this.setState({ drinksByIngredient: response.data });      
+  useEffect(() => {
+    if (!drinks) {
+      const ingredient = props.match.url.split('/');
+      getCocktailByIngredient(ingredient[1]);
     }
-  }
-  
-  render() {
-    const display = this.state.drinks
-      ? this.state.drinks.map((drink) => <Card drink={drink} key={drink.id} />)
-      : this.state.drinksByIngredient ? this.state.drinksByIngredient.map((drink) => <Card drink={drink} key={drink.id} />)
-      : ''
-    return (
-      <div className="cocktails-board">
-        {/* {JSON.stringify(this.state.drinksByIngredient)} */}
-      { display }
-    </div>
-    );
-  }
-}
+  }, [drinks]);
 
+  return (
+    <div className="cocktails-board">
+      { drinks ? drinks.map((drink) => <Card drink={drink} key={drink.id} />) : '' }
+    </div>
+  );
+}
