@@ -33,20 +33,11 @@ export default class MainContainer extends Component {
       .then((data) => this.setState({ specificCocktail: data.data }));
   };
 
-  filter(e) {
-    const { value } = e.target;
-    const { data } = this.state;
-    if (value !== '') {
-      this.setState({
-        result: {
-          hits: data.hits.filter((hit) => hit.title.toLowerCase().includes(value.toLowerCase())),
-        },
-      });
-    } else {
-      this.setState({ result: data });
-    }
-  }
-
+  getCocktailByIngredient = (ingredient) => {
+    this.setState({ hasSearched: true, data: null });
+    axios.get(`/api/ingredients/${ingredient}`)
+      .then((data) => this.setState({ drinks: data.data, result: data.data }));
+  };
 
   render() {
     const display = this.state.drinks ? <Board drinks={this.state.result} /> : <HomeContainer />
@@ -56,13 +47,19 @@ export default class MainContainer extends Component {
         <div className="main-container">
           <Header search={this.getCocktail} />
           <Switch>
-            <Route exact path="/" render={ () => display }/>
-            {/* <Route path="/ingredient" component={HomeContainer}/> */}
-            {/* <Route path="/drink" /> */}
             <Route path="/drink/:id" component={DrinkContainer}/> }/>
+            <Route path="/vodka" component={Board} /> />
+            <Route path="/whiskey" component={Board} /> />
+            <Route path="/gin" component={Board} /> />
+            <Route path="/rum" component={Board} /> />
+            <Route path="/tequila" component={Board} /> />
+            <Route exact path="/" render={ () => display }/>
           </Switch>
         </div>
       </BrowserRouter>
     );
   }
 }
+
+//Create component on componentmount fetch the data from API
+// passing props react router

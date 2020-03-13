@@ -66,14 +66,10 @@ router.get('/cocktails/random', async (req, res, next) => {
   res.json(result.data);
 });
 
-// Get Cocktail by ingredient
 router.get('/ingredients/:ingredient', async (req, res, next) => {
-  const result = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`);
-  res.json(result.data);
+  const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`);
+  const result = initialResult.data.drinks.map((drink) => (formatObject(drink)));
+  res.json(result);
 });
-
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
 
 module.exports = router;
