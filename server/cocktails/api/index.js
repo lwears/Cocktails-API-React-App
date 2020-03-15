@@ -37,27 +37,27 @@ const formatObject = (obj) => {
 
 
 // Get Specific Cocktail, /api/cocktails/:nameOfCocktail
-router.get('/cocktails/:cocktail', async (req, res, next) => {
+router.get('/cocktails/:cocktail', async (req, res) => {
   const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${req.params.cocktail}`);
   const result = initialResult.data.drinks.map((drink) => (formatObject(drink)));
   res.json(result);
 });
 
 // Get Specific Cocktail, /api/CocktailID
-router.get('/:cocktailID', async (req, res, next) => {
+router.get('/:cocktailID', async (req, res) => {
   const initialResult = await axios.get(`  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${req.params.cocktailID}`);
   const result = formatObject(initialResult.data.drinks[0]);
   res.json(result);
 });
 
-router.get('/ingredients/:ingredient', async (req, res, next) => {
+router.get('/ingredients/:ingredient', async (req, res) => {
   const initialResult = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${req.params.ingredient}`);
   const result = initialResult.data.drinks.map((drink) => (formatObject(drink)));
   res.json(result);
 });
 
 // Get Random cocktail
-router.get('/cocktails/random', async (req, res, next) => {
+router.get('/cocktails/random', async (req, res) => {
   const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
   res.json(result.data);
 });
