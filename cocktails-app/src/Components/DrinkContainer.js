@@ -1,31 +1,22 @@
-import React, { Component } from 'react';
-import Drink from './Drink';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Drink from './Drink';
 
-export default class DrinkContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
 
-  getSpecificCocktail = (id) => {   
-    this.setState({ hasSearched: true, data: null });
+export default function DrinkContainer(props) {
+  const [specificCocktail, setSpecificCocktail] = useState(null);
+
+  const getSpecificCocktail = (id) => {
     axios.get(`/api/${id}`)
-      .then((data) => this.setState({ specificCocktail: data.data }));
+      .then((data) => setSpecificCocktail(data.data));
   };
 
-  componentDidMount(props) {
-    const id = this.props.match.url.replace('/drink/', '');
-    this.getSpecificCocktail(id)
-  }
+  useEffect(() => {
+    const id = props.match.url.replace('/drink/', '');
+    getSpecificCocktail(id);
+  }, [props.match.url]);
 
-  render() {
-   const display = this.state.specificCocktail
-      ? <Drink cocktail={this.state.specificCocktail}/>
-      : ''
-    return (
-      display
-    );
-  }
+  return (
+    specificCocktail ? <Drink cocktail={specificCocktail} /> : ''
+  );
 }

@@ -16,7 +16,7 @@ export default function Board(props) {
       const ingredient = props.match.url.split('/');
       getCocktailByIngredient(ingredient[1]);
     }
-  }, [drinks]);
+  }, [drinks, props.match]);
 
   return (
     <div className="cocktails-board">
