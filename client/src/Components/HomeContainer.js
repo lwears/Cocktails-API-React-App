@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/homeContainer.css';
+import '../css/HomeContainer.css';
 import Ingredient from './Ingredient';
 import Whiskey from './Images/Optimized-whiskey.jpg';
 import Vodka from './Images/Optimized-vodka.jpg';
@@ -17,18 +17,12 @@ const categories = [
 
 export default function HomeContainer() {
   return (
-    <div className="home">
-      <div className="home-ingredients">
-        {categories && categories.map(
-          (item, index) => (
-            <Ingredient
-              key={index}
-              name={item.name}
-              image={item.image}
-              link={item.link}
-            />
-          ),
-        )}
+    <div className='home'>
+      <div className='home-ingredients'>
+        {categories &&
+          categories.map((item, index) => (
+            <Ingredient key={index} name={item.name} image={item.image} link={item.link} />
+          ))}
       </div>
     </div>
   );

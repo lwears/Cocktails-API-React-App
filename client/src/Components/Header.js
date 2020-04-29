@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from './Search';
-import '../css/header.css';
+import '../css/Header.css';
 
 export default function Header(props) {
   const { search } = props;

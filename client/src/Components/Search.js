@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/search.css';
+import '../css/Search.css';
 import { useHistory } from 'react-router-dom';
 
 export default function Search(props) {
@@ -14,9 +14,9 @@ export default function Search(props) {
   };
 
   return (
-    <form className="search" onSubmit={handleSubmit}>
-      <input type="text" id="search" ref={searchInput} />
-      <input type="submit" value="Search" />
+    <form className='search' onSubmit={handleSubmit}>
+      <input type='text' id='search' ref={searchInput} />
+      <input type='submit' value='Search' />
     </form>
   );
 }

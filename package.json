@@ -1,0 +1,22 @@
+{
+  "name": "hackDayApp",
+  "version": "1.0.0",
+  "description": "## Frontend",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd server && npm install",
+    "start": "node ./server/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lwears/hackDayApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lwears/hackDayApp/issues"
+  },
+  "homepage": "https://github.com/lwears/hackDayApp#readme",
+  "dependencies": {}
+}

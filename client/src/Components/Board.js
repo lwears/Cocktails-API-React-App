@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Card';
-import '../css/board.css';
+import '../css/Board.css';
 
 export default function Board(props) {
   const [drinks, setDrinks] = useState(props.drinks);
@@ -19,8 +19,8 @@ export default function Board(props) {
   }, [drinks, props.match]);
 
   return (
-    <div className="cocktails-board">
-      { drinks ? drinks.map((drink) => <Card drink={drink} key={drink.id} />) : '' }
+    <div className='cocktails-board'>
+      {drinks ? drinks.map((drink) => <Card drink={drink} key={drink.id} />) : ''}
     </div>
   );
 }

@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const router = express.Router();
+const path = require('path');
+
+/* GET React Frontend. */
+router.get(['/', '/*'], (req, res) => {
+  res.sendFile(path.resolve('../') + '/hackDayApp/client/build/index.html');
 });
 
 module.exports = router;
